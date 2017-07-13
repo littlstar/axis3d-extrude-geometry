@@ -55,6 +55,5 @@ frame(({time}) => {
   positions: Array
   path: Array
   uvs: Array
-  _complex: Object
 }
 ```
