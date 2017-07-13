@@ -1,0 +1,58 @@
+{
+  "name": "axis3d-extrude-geometry",
+  "version": "1.0.0",
+  "description": "Geometry extrusion module for Axis3D.",
+  "main": "index.js",
+  "scripts": {
+    "test": ":",
+    "example": "budo example -p 3000 --live --verbose"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "babel": {
+    "plugins": [
+      "transform-es2015-destructuring"
+    ]
+  },
+  "devDependencies": {
+    "axis3d": "^0.1.13",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "budo": "^10.0.3"
+  },
+  "peerDependencies": {
+    "axis3d": "^0.1.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/littlstar/axis3d-extrude-geometry.git"
+  },
+  "keywords": [
+    "webgl",
+    "gl",
+    "geometry",
+    "extrude",
+    "extrusion",
+    "vector",
+    "graphics"
+  ],
+  "author": "Vanessa Pyne <vip@littlstar.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/littlstar/axis3d-extrude-geometry/issues"
+  },
+  "homepage": "https://github.com/littlstar/axis3d-extrude-geometry#readme",
+  "dependencies": {
+    "cdt2d": "^1.0.0",
+    "clean-pslg": "^1.1.2",
+    "defined": "^1.0.0",
+    "extrude": "^1.0.1",
+    "extrude-by-path": "^1.1.0",
+    "extrude-edges": "0.0.0",
+    "is-typedarray": "^1.0.0"
+  }
+}
