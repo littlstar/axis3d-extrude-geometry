@@ -29,9 +29,10 @@ function ExtrudeGeometry({
   } = {}) {
 
   let complex = null
-  let extrudedGeometry = {}
 
-  if (false == isTypedArray(positions)) {
+  if (null == positions) {
+    throw new TypeError("Expecting positions to be an array, but `null` was given.")
+  } else if (false == isTypedArray(positions)) {
     throw new TypeError("Expecting positions to be an array.")
   } else if (0 == positions.length) {
     throw new TypeError("Empty positions array given.")
@@ -42,9 +43,11 @@ function ExtrudeGeometry({
   } else {
     closed = Boolean(closed)
 
-    if (false == isTypedArray(path)) {
-      throw new TypeError("Expecting path to be an array.")
-    } else if (0 == path.length) {
+// TODO: @vipyne fix this
+// if (false == Boolean(isTypedArray(path))) {
+//       throw new TypeError("Expecting path to be an array.")
+//     } else
+    if (0 == path.length) {
       throw new TypeError("Empty path array given.")
     }
 
@@ -55,8 +58,9 @@ function ExtrudeGeometry({
       for (let i = 0; i < tmp.length; i += 2) {
         edges.push([tmp[i], tmp[i + 1]])
       }
-    } else if (false == isTypedArray(edges)) {
-      throw new TypeError("Expecting edges to be an array.")
+// TODO: @vipyne fix this
+    // } else if (false == Boolean(isTypedArray(edges))) {
+    //   throw new TypeError("Expecting edges to be an array.")
     } else if (0 == edges.length) {
       throw new TypeError("Empty edges array given.")
     }
@@ -64,7 +68,7 @@ function ExtrudeGeometry({
     // triangluate cells if cells aren't given and edges are
     if (null == cells) {
       cells = cdt2d(positions)
-    } else if (cells && false == isTypedArray(cells)) {
+    } else if (cells && false == Boolean(isTypedArray(cells))) {
       throw new TypeError("Expecting cells to be an array.")
     } else if (0 == cells.length) {
       throw new TypeError("Empty cells array given.")
@@ -80,15 +84,7 @@ function ExtrudeGeometry({
     })
   }
 
-  const extrusion = new Geometry({complex})
-
-  extrudedGeometry._complex = extrusion._complex
-  extrudedGeometry.complex = extrusion.complex
-  extrudedGeometry.positions = extrusion.complex.positions
-  extrudedGeometry.normals = extrusion.complex.normals
-  extrudedGeometry.uvs = extrusion.complex.uvs
-  extrudedGeometry.cells = extrusion.complex.cells
-  extrudedGeometry.path = extrusion.path
+  const extrudedGeometry = new Geometry({complex})
 
   return extrudedGeometry
 }
