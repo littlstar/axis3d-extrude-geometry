@@ -13,6 +13,10 @@ const cleanPSLG = require('clean-pslg')
 const coalesce = require('defined')
 const cdt2d = require('cdt2d')
 
+const isArrayLike = (array) => {
+  return Boolean(Array.isArray(array) || isTypedArray(array))
+}
+
 const kDefaultExtrudeGeometryPathZCoefficient = 0.001
 const kDefaultExtrudeGeometryPathSteps = 10
 
@@ -32,7 +36,7 @@ function ExtrudeGeometry({
 
   if (null == positions) {
     throw new TypeError("Expecting positions to be an array, but `null` was given.")
-  } else if (false == isTypedArray(positions)) {
+  } else if (false == isArrayLike(positions)) {
     throw new TypeError("Expecting positions to be an array.")
   } else if (0 == positions.length) {
     throw new TypeError("Empty positions array given.")
@@ -43,10 +47,9 @@ function ExtrudeGeometry({
   } else {
     closed = Boolean(closed)
 
-// TODO: @vipyne fix this
-// if (false == Boolean(isTypedArray(path))) {
-//       throw new TypeError("Expecting path to be an array.")
-//     } else
+    if (false == isArrayLike(path)) {
+      throw new TypeError("Expecting path to be an array.")
+    } else
     if (0 == path.length) {
       throw new TypeError("Empty path array given.")
     }
@@ -58,9 +61,8 @@ function ExtrudeGeometry({
       for (let i = 0; i < tmp.length; i += 2) {
         edges.push([tmp[i], tmp[i + 1]])
       }
-// TODO: @vipyne fix this
-    // } else if (false == Boolean(isTypedArray(edges))) {
-    //   throw new TypeError("Expecting edges to be an array.")
+    } else if (false == isArrayLike(edges)) {
+      throw new TypeError("Expecting edges to be an array.")
     } else if (0 == edges.length) {
       throw new TypeError("Empty edges array given.")
     }
@@ -68,7 +70,7 @@ function ExtrudeGeometry({
     // triangluate cells if cells aren't given and edges are
     if (null == cells) {
       cells = cdt2d(positions)
-    } else if (cells && false == Boolean(isTypedArray(cells))) {
+    } else if (cells && false == isArrayLike(cells)) {
       throw new TypeError("Expecting cells to be an array.")
     } else if (0 == cells.length) {
       throw new TypeError("Empty cells array given.")

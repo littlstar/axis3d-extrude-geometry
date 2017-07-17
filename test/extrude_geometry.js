@@ -20,7 +20,7 @@ test('new ExtrudeGeometry({positions})', ({
   plan,
   end
 }) => {
-  plan(10)
+  plan(12)
 
   if ('function' == typeof ExtrudeGeometry) {
     pass('is function')
@@ -30,12 +30,12 @@ test('new ExtrudeGeometry({positions})', ({
         TypeError,
         'throws TypeError when `positions` is not an array.')
 
-  // throws(() => { createExtrudedGeometry({
-  //                     positions: [1,0,-1],
-  //                     path: {}})
-  //       },
-  //       TypeError,
-  //       'throws TypeError when `path` is not an array.')
+  throws(() => { createExtrudedGeometry({
+                      positions: [1,0,-1],
+                      path: {}})
+        },
+        TypeError,
+        'throws TypeError when `path` is not an array.')
 
   throws(() => { createExtrudedGeometry({
                       positions: [1,0,-1],
@@ -44,13 +44,13 @@ test('new ExtrudeGeometry({positions})', ({
         TypeError,
         'throws TypeError when `path` array is empty.')
 
-  // throws(() => { createExtrudedGeometry({
-  //                     positions: [1,0,-1],
-  //                     path: [1,0,-1],
-  //                     edges: undefined})
-  //       },
-  //       TypeError,
-  //       'throws TypeError when `edges` is not an array.')
+  throws(() => { createExtrudedGeometry({
+                      positions: [1,0,-1],
+                      path: [1,0,-1],
+                      edges: 'undefined'})
+        },
+        TypeError,
+        'throws TypeError when `edges` is not an array.')
 
   throws(() => { createExtrudedGeometry({
                       positions: [1,0,-1],
