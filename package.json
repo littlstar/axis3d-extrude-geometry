@@ -1,7 +1,7 @@
 {
   "name": "axis3d-extrude-geometry",
   "version": "1.0.0",
-  "description": "Geometry extrusion module for Axis3D.",
+  "description": "Geometry extrusion for Axis3D.",
   "main": "index.js",
   "scripts": {
     "test": "devtool test/index.js -hqc -t 1000 | node_modules/.bin/colortape",
@@ -31,7 +31,10 @@
     "vector",
     "graphics"
   ],
-  "author": "Vanessa Pyne <vip@littlstar.com>",
+  "author": "Joseph Werle <werle@littlstar.com>",
+  "contributors": [
+    "Vanessa Pyne <vip@littlstar.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/littlstar/axis3d-extrude-geometry/issues"
