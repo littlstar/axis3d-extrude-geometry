@@ -1,20 +1,13 @@
-'use strict'
+const { PerspectiveCamera } = require('axis3d/camera')
+const { Material } = require('axis3d/material')
+const { Context } = require('axis3d')
+const { Frame } = require('axis3d/frame')
+const { Mesh } = require('axis3d/mesh')
 
-const {
-  PerspectiveCamera,
-  FlatMaterial,
-  Command,
-  Context,
-  Frame,
-  Mesh,
-} = require('axis3d')
-
-const { BoxGeometry,
-        ExtrudeGeometry,
-       } = require('../')
-
+const { ExtrudeGeometry } = require('../')
 const quat = require('gl-quat')
 
+// https://github.com/substack/extrude-by-path
 function helix() {
   let helix = {}
   const path = []
@@ -34,10 +27,9 @@ function helix() {
 }
 
 const ctx = new Context()
-const material = new FlatMaterial(ctx)
+const material = new Material(ctx)
 const camera = new PerspectiveCamera(ctx)
 const frame = new Frame(ctx)
-
 const box = new Mesh(ctx, {geometry: new ExtrudeGeometry(helix())})
 
 frame(({time}) => {
